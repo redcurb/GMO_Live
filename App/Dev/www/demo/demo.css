@@ -1,0 +1,66 @@
+/*global elements*/
+body,html{
+	background:#fff;
+}
+ul{
+	margin:0;
+	padding:0;	
+}
+li{
+	list-style:none;	
+}
+
+iframe{
+	padding:0;
+	margin:0;
+	border:none;	
+}
+
+.content-container{
+	width:763px;
+	padding:20px 20px 50px;
+	margin:0 auto;
+	
+}
+	.demo-container{
+		background:url(white-iphone-image.jpg) no-repeat 0 0;
+		display:block;
+		width:611px;
+		height:1249px;
+		margin:0 auto;
+	}
+		#frame-demo{
+			display:block;
+			width:438px;
+			height:777px;
+			position:relative;
+			left:85px;
+			top:183px;
+		}
+	ul#app-links{
+		overflow:hidden;
+	}		
+		ul#app-links li{
+			float:left;
+			
+		}		
+		ul#app-links li.app-android{
+			float:right;
+			
+		}		
+			ul#app-links li a{
+				width:360px;
+				height:96px;
+				display:block;
+			}		
+		ul#app-links li.app-ios a{
+			background:url(app-ios.png) no-repeat 0 0;
+		}		
+		ul#app-links li.app-android a{
+			background:url(app-android.png) no-repeat 0 0;
+		}		
+		
+		
+		
+		
+

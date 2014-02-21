@@ -1,0 +1,7 @@
+@import url("base-1.01.css");
+@import url("login-1.01.css");
+@import url("queries-1.01.css");
+
+#deviceProperties{
+	display:none;	
+}

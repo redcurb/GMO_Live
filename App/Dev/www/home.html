@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.5, maximum-scale=1.0, user-scalable=0;"/>
+	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0;"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
+	<link rel="stylesheet" href="css/reset-min.css" />
+	<link rel="stylesheet" href="css/libraries/jquery-ui/minified/jquery-ui.min.css" />
+    <link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,700,300,500' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/base.css" />
+	<link rel="stylesheet" href="css/login.css" />
+	<link rel="stylesheet" href="css/queries.css" />
+
+	<link rel="stylesheet" href="http://cpptl.co/apps/reachtheworld/assets/css/override.css" />
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+</head>
+<body class="" id="" data-role="none" data-appVersion="1.0">
+	<div id="deviceProperties">deviceProperties</div>
+	<div class="page-container">
+		<div id="worldview" data-page="worldview" class="page page-worldview">
+			<section class="section-globe">
+				<div class="globe" id="globe"></div>
+			</section>
+			<section class="section-stats">
+				<h3><span>Today</span></h3>
+				<ul class="stats">
+					<li class="stats-gospel">
+						<i class="stats-icon"></i>
+						<span class="stats-value">&nbsp;</span>
+						<label>Gospel<br>Visits</label>
+					</li>
+					<li class="stats-decisions">
+						<i class="stats-icon"></i>
+						<span class="stats-value">&nbsp;</span>
+						<label>Indicated<br>Decisions</label>
+					</li>
+					<li class="stats-connections">
+						<i class="stats-icon"></i>
+						<span class="stats-value">&nbsp;</span>
+						<label>Discipleship</label>
+					</li>
+				</ul>
+			</section>
+			<section class="section-calculator">
+				<h4><span>Donation Calculator:</span></h4>
+				<form class="form-calculator">
+				<!--
+				oninput="val=parseInt(calculatorInput.value.replace('$',''));calculatorInput.data='1000';calculatorInput.value='$'+val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');calculatorResult.value='$' + (val * 20).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'+';"
+				-->
+				  <input type="tel" id="calculatorInput" class="input-calculator-spend" maxlength="14">
+				  <span class="calculator-equals">=</span>
+				  <output name="calculatorResult" for="calculatorInput" id="calculatorResult" value="">&nbsp;</output>
+				  <label for="calculatorResult" class="label-calculator">Gospel Visits</label>
+				</form>
+				<h4><span>For More Info:</span></h4>
+				<ul class="list-buttons">
+					<li class="button-call"><a href="#" class="btn"><span>Call</span></a></li>
+					<li class="button-email"><a href="#" class="btn"><span>Email</span></a></li>
+				</ul>
+			</section>
+			<section class="section-video">
+				<div class="video-container">
+					<!--<iframe src="//player.vimeo.com/video/7915748" width="500" height="375" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>-->
+				</div>
+			</section>
+			<section class="section-share">
+				<h4><span>Share App:</span></h4>
+				<ul class="list-share">
+					<li class="first share-facebook" data-id="facebook"><i class="fa fa-facebook"></i></li>
+					<li class="share-twitter" data-id="twitter"><i class="fa fa-twitter"></i></li>
+					<li class="share-email" data-id="email"><i class="fa fa-envelope-o"></i></li>
+				</ul>
+			</section>
+			<footer class="footer-primary">
+				<i class="logo"></i>
+			</footer>
+		</div>
+	</div>
+	<div id="page-login">
+		<form id="form-login" name="form-login">
+			<h2>Reach the World</h2>
+			<div class="fieldset fieldset-text">
+				<input type="text" name="login-name" id="login-name" placeholder="Full Name" />
+				<input type="email" name="login-email" id="login-email" placeholder="Email" />
+				<input type="tel" name="login-phone" id="login-phone" placeholder="Phone" />
+			</div>
+			<div class="fieldset fieldset-btn">
+				<div class="fieldset-col fieldset-col-1">
+					<a class="link link-secondary" data-role="none" id="link-skip">Skip</a>
+				</div>
+				<div class="fieldset-col fieldset-col-2">
+					<button type="submit" class="btn btn-primary" data-role="none">Enter</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div id="screen-login"></div>
+	<div class="screen-blur"></div>
+	<script src="js/libraries/jquery-1.11.0.min.js"></script>
+	<script src="js/libraries/jquery-ui-1.10.4.js"></script>
+	<script src="http://www.greatcommission2020.com/js/libs/bower/requirejs/require.js"></script>
+	<script src="js/libraries/handlebars-v1.1.2.js"></script>
+	<script src="js/libraries/handlebars.helpers.js"></script>
+	<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.3/firebase.js'></script>
+	
+	<script src="js/plugins/PushNotification.js"></script>
+	
+	<script src="js/plugins/jquery.spinningGlobe.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/helpers.js"></script>
+	<script type="text/javascript" src="js/tracking.js"></script>
+	<script type="text/javascript" src="js/globe.js"></script>
+	<script type="text/javascript" src="js/share.js"></script>
+	<script type="text/javascript" src="js/contact.js"></script>
+	<script type="text/javascript" src="js/push.js"></script>
+</body>
+</html>
