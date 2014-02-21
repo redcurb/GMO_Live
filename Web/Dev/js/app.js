@@ -6,52 +6,21 @@ GMO.Push = GMO.Push || {};
 window.AppData = {};
 window.AppData.timestamp = new Date().getTime();
 
-document.addEventListener("deviceready", onDeviceReady, false);
-function onDeviceReady(){
-    AppData.deviceready = true;
-}
-
 GMO.App = {
 	setup:function(){
-		if(AppData.deviceready){
-			console.log('device ready');
-			GMO.App.onDeviceReady();
-		}
-		else{
-			console.log('device not ready');
-			setTimeout(function() {
-				GMO.App.setup();
-			},500);
-		}
+		GMO.App.init();
 	},
 	
 	init: function(){
 		AppData.TestMode=false;
 		AppData.DesktopMode=false;
-		
-		if(device.uuid=='189D008E-DA88-47C5-8319-F7F46EBF6BB6'){
-			AppData.TestMode=true;
-			//$('#deviceProperties').show();
-			$('#deviceProperties').remove();
-		}
-		
+
 		if(typeof(device)=='undefined'){
 			device = {};
 			device.uuid = window.AppData.timestamp;
 		}
 		GMO.App.setupListeners();
 		GMO.App.getAppData();
-		GMO.App.updateDOM.init();
-	},
-
-	updateDOM: {
-		init:function(){
-			//GMO.App.updateDOM.version1();
-		},
-		
-		version1:function(){
-			//$('ul.stats .stats-connections label').html('Discipleship');
-		}
 	},
 
 	checkLoginStatus:function(){
@@ -288,23 +257,7 @@ GMO.App = {
 	},	
 
 	setupListeners:function(){
-		//document.addEventListener('touchmove', function (e) {e.preventDefault();}, false);
 		$(document).on("AppDataLoaded", GMO.App.setupApp);
-		//document.addEventListener("deviceready", GMO.App.onDeviceReady, false);
-		//GMO.App.init();
-	},	
-
-	onDeviceReady:function(){
-		if(typeof(device)!='undefined'){
-			var element = document.getElementById('deviceProperties');
-			
-			element.innerHTML = 'Device Name: '     + device.name     + '<br />' + 
-								'Device PhoneGap: ' + device.phonegap + '<br />' + 
-								'Device Platform: ' + device.platform + '<br />' + 
-								'Device UUID: '     + device.uuid     + '<br />' + 
-								'Device Version: '  + device.version  + '<br />';
-		}
-		GMO.App.init();
 	},	
 
 	setupApp:function(){
@@ -458,22 +411,16 @@ $(function() {
 		AppData.demoMode = true;
 	}
 	if(Redcurb.Helpers.getParameterByName('testmode')=="true"){
-		AppData.deviceready = true;
 		AppData.TestMode = true;
 		//$('#deviceProperties').show();
 	}
 	if(Redcurb.Helpers.getParameterByName('desktop')=="true"){
 		AppData.DesktopMode = true;
+		/*
 		window.device = {
-		  "name" : "",
-		  "platform" : "iOS",
-		  "available" : true,
-		  "model" : "iPhone5,1",
-		  "cordova" : "3.0.0",
-		  "version" : "7.0.4",
-		  //"uuid" : "TEST-6BA9-4D55-BA5B-47D627541927" + window.AppData.timestamp
-		  "uuid" : "TEST-6BA9-4D55-BA5B-47D627541927"
+		  'uuid':'TEST-189D008E-DA88-47C5-8319-F7F46EBF6BB6'
 		};
-	}	
+		*/
+	}
 	GMO.App.setup();
 });
