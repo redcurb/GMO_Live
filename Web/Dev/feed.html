@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body class="" id="" data-role="none" data-appVersion="0.1">
+	<div class="stats">
+		<span class="stats-gospel">0</span>
+		<span>Gospel Visits</span>
+		<br><br>
+		<span class="stats-decisions">0</span>
+		<span>Indicated Decisions</span>
+		<br><br>
+		<span class="stats-connections">0</span>
+		<span>Direct Connections</span>
+	</div>
+	<script src="js/libraries/jquery-1.11.0.min.js"></script>
+	<script src="js/libraries/jquery-ui-1.10.4.js"></script>
+	<script src="http://stage.greatcommission2020.com/js/libs/bower/requirejs/require.js"></script>
+	<script>
+		var $statsGospel = $('.stats-gospel');
+		var $statsDecisions = $('.stats-decisions');
+		var $statsConnections = $('.stats-connections');
+		
+		require(["//stage.greatcommission2020.com/js/common.js"], function() {
+			require(["counters", "api"], function(Counters, Api) {
+				
+				console.log('require');
+				// Counters
+				var counters = new Counters({
+					gospel: $statsGospel,
+					decision: $statsDecisions,
+					discipleship: $statsConnections
+				});
+			
+				// Socket
+				Api.createCountersSocket("jonFrendlAppMap", counters).on("visit", onVisit);
+			
+				function onVisit(visitor) {
+					console.log(visitor);
+				};
+			});
+		});
+
+	</script>
+</body>
+</html>

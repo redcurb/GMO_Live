@@ -1,0 +1,109 @@
+::-webkit-scrollbar {
+	width: 0;
+	height:0;
+}
+@media (max-width: 639px) {
+	body, html {
+		font-size: 40px;
+	}
+	ul.stats li .stats-icon {
+		width: 40px;
+		height: 40px;
+		background-size:100% auto;
+	}
+	ul.stats li.stats-decisions .stats-icon {
+		background-position: 0 -40px;
+	}
+	ul.stats li.stats-connections .stats-icon {
+		background-position: 0 -80px;
+	}
+	
+	.list-buttons li a.btn{
+		width: 166.5px;
+		height: 49px;
+		margin:0 18px 0 0;
+		padding-top:15px;
+	}
+	.list-buttons li.button-email a.btn{
+		margin:0 0 0 18px;
+	}
+		.list-buttons li a.btn span{
+			font-size:0.7em;
+		}
+		.section-share ul.list-share{
+			margin-top:30px;
+		}
+	.footer-primary {
+		padding:3% 0 7%;
+	}	
+		.footer-primary .logo {
+			width: 201px;
+			height: 62.25px;
+			background-size:100% auto;
+		}
+}
+@media (max-width: 479px) {
+	body, html {
+		font-size: 32px;
+	}
+	ul.stats li .stats-icon {
+		width: 25px;
+		height: 25px;
+		background-size:100% auto;
+	}
+	ul.stats li.stats-decisions .stats-icon {
+		background-position: 0 -25px;
+	}
+	ul.stats li.stats-connections .stats-icon {
+		background-position: 0 -50px;
+	}
+	ul.stats li .stats-value {
+		font-size: 0.75em;
+		letter-spacing: 0px;
+	}
+	.list-buttons{
+
+	}
+	.list-buttons li a.btn {
+	}
+	
+	.list-buttons li a.btn{
+		width: 111px;
+		height: 43px;
+		margin:0 12px 0 0;
+	}
+	.list-buttons li.button-email a.btn{
+		margin:0 0 0 12px;
+	}
+		.list-buttons li a.btn span{
+			
+		}
+		.section-share ul.list-share{
+			margin-top:20px;
+		}
+	.footer-primary {
+		padding:3% 0 7%;
+	}	
+		.footer-primary .logo {
+			width: 134px;
+			height: 41.5px;
+			background-size:100% auto;
+		}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
