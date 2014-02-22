@@ -165,6 +165,7 @@ GMO.App = {
 			return false;
 		});
 		$('#form-login input').on('focus',function(event){
+			$('#addToHomeScreen').remove();
 			$(this).removeClass('valid-false');
 		});
 		$('#form-login #link-skip').on('focus',function(event){

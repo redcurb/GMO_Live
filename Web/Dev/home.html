@@ -5,18 +5,24 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.5, maximum-scale=1.0, user-scalable=0;"/>
 	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0, user-scalable=0;"/>
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="apple-mobile-web-app-title" content="GMO Live">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 	<link rel="stylesheet" href="css/reset-min.css" />
 	<link rel="stylesheet" href="css/libraries/jquery-ui/minified/jquery-ui.min.css" />
     <link href='http://fonts.googleapis.com/css?family=Exo+2:400,100,700,300,500' rel='stylesheet' type='text/css'>
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/add2home.css">
 	<link rel="stylesheet" href="css/base.css" />
 	<link rel="stylesheet" href="css/login.css" />
 	<link rel="stylesheet" href="css/queries.css" />
-
 	<link rel="stylesheet" href="css/override.css" />
+
+	<link rel="apple-touch-icon" href="img/webapp/touch-icon-iphone.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/webapp/touch-icon-ipad.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/webapp/touch-icon-iphone4.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="img/webapp/touch-icon-ipad2.png">
 </head>
 <body class="" id="" data-role="none" data-appVersion="1.0">
 	<div id="deviceProperties">deviceProperties</div>
@@ -108,13 +114,22 @@
 	<script src='https://cdn.firebase.com/js/client/1.0.3/firebase.js'></script>
 	
 	<script src="js/plugins/jquery.spinningGlobe.js"></script>
-	<script src="js/app.js"></script>
+	<script src="js/app.js?ver=1"></script>
 	<script src="js/helpers.js"></script>
 	<script src="js/tracking.js"></script>
 	<script src="js/globe.js"></script>
 	<script src="js/share.js"></script>
 	<script src="js/contact.js"></script>
 	<script src="js/push.js"></script>
+	<script type="text/javascript">
+		var addToHomeConfig = {
+			animationIn: 'bubble',
+			animationOut: 'drop',
+			lifespan:10000,
+			touchIcon:true
+		};
+	</script>
+	<script type="text/javascript" src="js/add2home.js" charset="utf-8"></script>
 	<div id="preload">
 		<img src="img/globe/globe_foreground.png">
 		<img src="img/globe/globe_background.png">
