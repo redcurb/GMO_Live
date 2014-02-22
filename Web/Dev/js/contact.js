@@ -1,6 +1,6 @@
 GMO.Contact = {
 	init: function(){
-		GMO.Contact.setupLinks();
+		//GMO.Contact.setupLinks();
 	},	
 
 	setupLinks:function(){
@@ -17,6 +17,7 @@ GMO.Contact = {
 		var emailHref = 'mailto:' + data.email.address + '?subject=' + subjectText + '&body=' + bodyText;
 		
 		console.log('callHref: ' + callHref);
+		console.log('emailHref: ' + emailHref);
 		
 		$call.attr('href',callHref);
 		$email.attr('href',emailHref);
