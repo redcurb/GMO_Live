@@ -1,19 +1,27 @@
 GMO.Share = {
 	init: function(){
-		GMO.Share.setupHandlers();
+		GMO.Share.addLinks();
 	},	
 
-	setupHandlers:function(){
-		$('ul.list-share li').on('click',function(){
-			GMO.Share.handleShare($(this).data('id'));
-			return false;
-		});
-		$('.footer-primary i.logo').on('click',function(){
-			var url = AppData.App.config.logo.url;
-			window.open(url, '_blank', 'location=yes');
-			return false;
-		});
-		
+	addLinks:function(provider){
+		var shareData = AppData.App.config.share;
+		var shareUrl = shareData.shareUrl;
+		shareUrl = 'http://www.gmolive.com/share/index.html';
+		var urlFb = 'http://www.facebook.com/sharer.php?u=' + shareUrl;
+		$('li.share-facebook a').attr('href',urlFb);
+
+		var shareText = shareData.twitter.body1;
+		var urlTwitter = 'https://twitter.com/intent/tweet?text=' + shareText + '&url=' + shareUrl;
+		$('li.share-twitter a').attr('href',urlTwitter);
+	
+		var textData = shareData.email;
+		var subjectText = textData.subject;
+		var bodyText = textData.body;
+		var userId = 'fxgd4sdf';
+		var urlEmail = $('li.share-email a').attr('href') + '?shareId=' + userId;
+		$('li.share-email a').attr('href',urlEmail);
+
+		$('.footer-primary a').attr('href',AppData.App.config.logo.url);
 	},
 
 	handleShare:function(provider){

@@ -38,6 +38,9 @@
 			#page-login form .fieldset{
 				overflow:hidden;
 			}
+			#page-login form .fieldset-btn{
+				margin:0 1%;
+			}
 				#page-login form .fieldset-col{
 					float:left;
 					width:50%;
@@ -46,7 +49,7 @@
 					width:100%;
 				}
 					#page-login form .fieldset-col-1{
-						display:none;	
+						
 					}
 					#page-login form .fieldset-col a,
 					#page-login form .fieldset-col button{
@@ -55,7 +58,6 @@
 					#page-login form .fieldset-col-2 a,
 					#page-login form .fieldset-col-2 button{
 						float:right;
-						float:none;
 					}
 				#page-login form input{
 					width: 94%;
@@ -84,9 +86,8 @@
 				#page-login form input.valid-false::-webkit-input-placeholder {color:#1b7290 !important;}
 				#page-login form input.valid-false:-moz-placeholder {color:#1b7290 !important;}
 				#page-login form input.valid-false:-ms-input-placeholder {color:#1b7290 !important;}
-				.btn.btn-primary{
-					background: #d0e9f0;
-					color: #1b7290;
+				
+				.btn{
 					padding: 24px 55px;
 					border: none;
 					font-size: 0.56em;
@@ -95,7 +96,17 @@
 					margin: 0 auto;
 					display: block;
 					border:1px solid #1c85a1;
+				}
+				.btn.btn-secondary{
+					background: #0f0;
+					color: #48565b;
 
+					background-image:linear-gradient(top, #fefeff 0%, #b6dde8 100%);
+					background-image:-webkit-linear-gradient(top, #fefeff 0%, #b6dde8 100%);
+				}
+				.btn.btn-primary{
+					background: #d0e9f0;
+					color: #1b7290;
 					background-image:linear-gradient(top, #fefeff 0%, #b6dde8 100%);
 					background-image:-webkit-linear-gradient(top, #fefeff 0%, #b6dde8 100%);
 				}

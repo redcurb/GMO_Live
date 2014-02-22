@@ -14,6 +14,7 @@ GMO.App = {
 	init: function(){
 		AppData.TestMode=false;
 		AppData.DesktopMode=false;
+		AppData.fbUUID = Redcurb.Helpers.getCookie('fbUUID');
 
 		if(typeof(device)=='undefined'){
 			device = {};
@@ -23,46 +24,101 @@ GMO.App = {
 		GMO.App.getAppData();
 	},
 
-	checkLoginStatus:function(){
+	checkUserAccountCreateStatus:function(){
+		console.log('\\\\\\\\ checkUserAccountCreateStatus');
+		var userAccountExists = false;
+		if(AppData.fbUUID!=''){
+			GMO.App.handleUserHasAccount();
+		}
+		else{
+			GMO.App.createUser();
+		}
+	},
+
+	handleUserHasAccount:function(){
+		console.log('handleUserHasAccount');
+		userAccountExists = true;
+		GMO.App.addUserAccessRecord();
+		GMO.App.checkUserAccountInfoStatus();
+	},
+
+	addUserAccessRecord:function(){
+		var dbUrl = 'https://gmocalc.firebaseio.com/users/webapp/byUUID';
+		var appData = new Firebase(dbUrl);
+		appData.child(AppData.fbUUID).child('access').push({timestamp:AppData.timestamp});
+		appData.child(AppData.fbUUID).child('accessCount').transaction(function(current_value) {
+			return current_value + 1;
+		});
+	},
+
+	sendUserData:function(method){
+		var dbUrl = 'https://gmocalc.firebaseio.com/users/webapp/byUUID/' + AppData.fbUUID;
+		var appData = new Firebase(dbUrl);
+		appData.child('UserInfo').set({name:AppData.UserData.UserInfo.name, email:AppData.UserData.UserInfo.email, phone:AppData.UserData.UserInfo.phone});
+	},	
+
+	checkUserAccountInfoStatus:function(){
+		console.log('checkUserAccountInfoStatus');
+		var dbUrl = 'https://gmocalc.firebaseio.com/users/webapp/byUUID/' + AppData.fbUUID;
+		var appData = new Firebase(dbUrl);
+		appData.once('value', function(snapshot){
+			console.log('fbUUID DATA');
+			console.log(snapshot==null);
+			console.log(snapshot.val()==null);
+			console.log(snapshot.val());
+			if(snapshot.val()!=null){
+				console.log('snapshot.val NOT NULL');
+				var data = snapshot.val();
+				if(typeof(data.UserInfo)!='undefined'){
+					console.log('USER INFO EXISTS');
+					console.log(data.UserInfo);
+					$('.page-container').show();
+				}
+				else{
+					console.log('USER INFO DOES NOT EXIST');
+					GMO.App.setupLoginOverlay();
+				}
+			}
+		});
+	},
+
+	createUser:function(){
+		console.log('createUser');
+		var dbUrl = 'https://gmocalc.firebaseio.com/users/webapp';
+		var appData = new Firebase(dbUrl);
+		var node = appData.child('byUUID').push({timestamp:AppData.timestamp});
+		node.once('value', function(snapshot) {
+			console.log(snapshot.name());
+			device.uuid = snapshot.name();
+			appData.child('userId/last').transaction(function(current_value) {
+				var newId = current_value + 1;
+				AppData.UserId = newId;
+				appData.child('userId/'+newId).set(device.uuid);
+				var data = {userId:newId,accessCount:1};
+				appData.child('byUUID/'+device.uuid).set(data);
+				appData.child('byUUID/'+device.uuid + '/access').push({timestamp:AppData.timestamp});
+				GMO.App.setToken();
+				GMO.App.setupLoginOverlay();
+				return newId;
+			});
+		});
+	},
+
+	setToken:function(){
+		Redcurb.Helpers.setCookie('fbUUID', device.uuid, 365 );
+	},
+
+	
+	getUserData:function(){
 		var loggedIn = false;
-		//loggedIn = true;
-		var child = 'byUUID/';
+		var child = 'webapp/UUID/';
 		var dbUrl = 'https://gmocalc.firebaseio.com/users/' + child + device.uuid;
 		var appData = new Firebase(dbUrl);
 		appData.once('value', function(snapshot) {
-			console.log('UUID');
-			console.log(snapshot==null);
-			console.log(snapshot.val()==null);
-
-			if(snapshot.val()!=null){
-				var data = snapshot.val();
-				if(typeof(data.UserInfo)!='undefined'){
-					loggedIn = true;
-					AppData.UserId = data.UserInfo.UserId;
-					//todo:add user id to AppData
-				}
-				
-			}
-
-
-			AppData.UserData = {};
-			AppData.UserData.FormData = {};
-			AppData.UserData.UserInfo = {name:'',email:'',phone:''};
-			GMO.App.sendUserData('init');
-			
-			if(AppData.TestMode){
-				//GMO.App.setupLoginOverlay();
-				//alert('windowWidth: ' + $(window).width() + '\n windowHeight: ' + $(window).height());
-			}
-			
-			if(loggedIn){
-				$('.page-container').show();
-			}
-			else{
-				GMO.App.setupLoginOverlay();
-			}
+			var userData = snapshot.val();
+			console.log(userData);
 		});
-	},	
+	},
 
 	setupLoginOverlay:function(){
 		$('#page-login').get(0).addEventListener('touchmove', function (e) {
@@ -101,6 +157,8 @@ GMO.App = {
 	setupLoginForm:function(){
 		$('#page-login,#screen-login').show();
 		$('.page-container').show();
+		AppData.UserData = {};
+		AppData.UserData.UserInfo = {name:'',email:'',phone:''};
 		$('#form-login').on('submit',function(event){
 			event.preventDefault();
 			GMO.App.handleLoginFormSubmit();
@@ -108,6 +166,9 @@ GMO.App = {
 		});
 		$('#form-login input').on('focus',function(event){
 			$(this).removeClass('valid-false');
+		});
+		$('#form-login #link-skip').on('focus',function(event){
+			GMO.App.dismissOverlay();
 		});
 	},	
 
@@ -156,9 +217,6 @@ GMO.App = {
 		if(formValid){
 			GMO.App.handleLoginSuccess();
 		}
-		else{
-			//alert('Please fill out the form');
-		}
 	},	
 
 	dismissOverlay:function(){
@@ -171,7 +229,7 @@ GMO.App = {
 		GMO.App.sendUserData('form');
 	},	
 
-	sendUserData:function(method){
+	sendUserDataApp:function(method){
 		var child = 'byUUID/';
 		if(typeof(device)=='undefined'){
 			device = {};
@@ -272,7 +330,7 @@ GMO.App = {
 			$('.page-container').show();
 		}
 		else if(AppData.App.config.login.enabled){
-			GMO.App.checkLoginStatus();
+			GMO.App.checkUserAccountCreateStatus();
 		}
 	},	
 
